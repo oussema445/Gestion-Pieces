@@ -1,0 +1,27 @@
+<img src="../assets/img/815912.png"   width="1536" height="220">
+<div class="container">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-striped">
+                <tr> <th>Id</th><th>Nom de piece</th> <th>Model</th> <th>Prix</th> <th>Date de Mise</th>  </tr>
+                <thead>
+                    <tr>
+                        <th>Liste des Piéces</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let piece of pieces">
+                    <tr>
+                        <td>{{piece.idPiece}}</td>
+                        <td>{{piece.nom}}</td>
+                        <td>{{piece.model}}</td>
+                        <td>{{piece.prix}}</td>
+                        <td>{{piece.dateMise | date:'dd/MM/yyyy'}}</td>
+                        <td><a class="btn btn-danger" (click)="supprimerPiece(piece)">Supprimer</a></td>
+                        <td><a class="btn btn-success" [routerLink]="['/updatePiece',piece.idPiece]">Modifier</a></td>
+                    </tr>
+                  
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
