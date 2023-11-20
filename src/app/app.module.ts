@@ -6,6 +6,9 @@ import { PiecesComponent } from './piece/pieces.component';
 import { AddPieceComponent } from './add-piece/add-piece.component';
 import { FormsModule } from '@angular/forms';
 import { UpdatePieceComponent } from './update-piece/update-piece.component';
+import { LoginComponent } from './login/login.component';
+import { RechercheParNatureComponent } from './recherche-par-nature/recherche-par-nature.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 
 @NgModule({
@@ -14,6 +17,9 @@ import { UpdatePieceComponent } from './update-piece/update-piece.component';
     PiecesComponent,
     AddPieceComponent,
     UpdatePieceComponent,
+    LoginComponent,
+    RechercheParNatureComponent,
+    ForbiddenComponent,
     
   ],
   imports: [

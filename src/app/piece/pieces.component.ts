@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Piece } from '../model/piece.model';
 import { PieceService } from '../services/piece.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-pieces',
@@ -8,11 +9,10 @@ import { PieceService } from '../services/piece.service';
 })
 export class PiecesComponent implements OnInit {
 
-    pieces? : Piece[]; 
+    pieces ! : Piece[]; 
 
-  constructor(private pieceService: PieceService) {
-  
-     }
+    constructor(private pieceService : PieceService,
+      public authService: AuthService) { }
 
   ngOnInit(): void {
 

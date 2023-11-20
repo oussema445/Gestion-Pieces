@@ -5,7 +5,7 @@
             <h2>Modifier une Piéce :</h2>
             </div>
         <div class="col-sm-2 col-md-2 col-lg-2">
-            <label>ID Piéce</label>
+            <label>Ref</label>
             <input  readonly type="text" [(ngModel)]="currentPiece.idPiece" name="idPiece" class="form-control">
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4">
@@ -24,6 +24,15 @@
             <label>Date De Mise</label>
             <input type="date" [(ngModel)]="currentPiece.dateMise" name="dateMise" class="form-control">
         </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Nature</label>
+            <select class="form-control form-control-lg" id="idNat" name="idNat"[(ngModel)]="updatedNatId">
+            <option *ngFor="let nat of natures" [value]="nat.idNat" >
+            {{nat.nomNat}}
+            </option>
+            </select>
+            </div>
+           
 <div class="mt-2">
 <button type="submit" (click)="updatePiece()" class="btn btn-success">Modifer</button>
 </div>

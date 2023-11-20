@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Piece } from '../model/piece.model';
+import { Nature } from '../model/nature.model';
+import { Observable, catchError, of } from 'rxjs';
+
+
+  
 
 
 @Injectable({
@@ -7,12 +12,28 @@ import { Piece } from '../model/piece.model';
 })
 export class PieceService {
 
+
  pieces : Piece[]; 
  piece! : Piece;
+
+
+
+
+
+
+
+  
+
+
+
+ natures : Nature[];
   constructor() { 
-    this.pieces = [{idPiece : 1, nom : "CRÉMAILLÈRE DE DIRECTION", model :"Volkswagen serie Golf", prix : 1500, dateMise : new Date("01/14/2011")},
-                     {idPiece : 2, nom : "RÉTROVISEUR", model :"BMW serie M", prix : 800, dateMise: new Date("12/17/2010")},
-                     {idPiece : 3, nom :"DISQUE DE FREIN", model :"MerCedes Benz", prix : 220, dateMise : new Date("02/20/2020")}
+    this.natures = [ {idNat : 1, nomNat : "Derection"},
+{idNat : 2, nomNat : "Accessoires"},
+{idNat : 3, nomNat : "batterie"}];
+    this.pieces = [{idPiece : 1, nom : "CRÉMAILLÈRE DE DIRECTION", model :"Volkswagen serie Golf", prix : 1500, dateMise : new Date("01/14/2011"),nature : {idNat : 1, nomNat : "Derection"}},
+                     {idPiece : 2, nom : "RÉTROVISEUR", model :"BMW serie M", prix : 800, dateMise: new Date("12/17/2010"),nature : {idNat : 2, nomNat : "Accessoires"}},
+                     {idPiece : 3, nom :"DISQUE DE FREIN", model :"MerCedes Benz", prix : 220, dateMise : new Date("02/20/2020"),nature : {idNat : 1, nomNat : "Derection"}}
                     ];
     
   }
@@ -54,6 +75,27 @@ this.supprimerPiece(p);
 this.ajouterPiece(p);
 this.trierPieces();
 }
-
-
+listeNatures(): Observable<Nature[]> {
+  return of(this.natures); // Supposons que this.natures soit votre tableau de Nature
 }
+
+      consulterNature(id:number): Nature{
+        return this.natures.find(nat => nat.idNat == id)!;
+        }
+       
+        rechercherPiecesParNature(idNat: number): Observable<Piece[]> {
+          return of(this.filterPiecesByNature(idNat)).pipe(
+            catchError((error: any) => {
+              console.error('Une erreur s\'est produite', error);
+              return of([]); // Retourne un Observable vide en cas d'erreur
+            })
+          );
+        }
+        
+        private filterPiecesByNature(idNat: number): Piece[] {
+          return this.pieces.filter(piece => piece.nature.idNat === idNat);
+        }
+        
+}
+
+
