@@ -13,6 +13,16 @@ export class RechercheParnatureComponent implements OnInit {
   Natures!: nature[];
   
 
+<<<<<<< HEAD
+  onChange() {
+    if (this.IdNature !== undefined) {
+      this.pieceService.rechercherPiecesParNature(this.IdNature).subscribe(
+        (pieces: Piece[]) => {
+          this.pieces = pieces;
+          console.log('Pièces avec la nature sélectionnée :', this.pieces);}
+      );
+    }
+=======
   constructor(private pieceService: PieceService) {}
   ngOnInit(): void {
     this.pieceService.listenatures().subscribe(
@@ -25,6 +35,7 @@ export class RechercheParnatureComponent implements OnInit {
         // Gérez les erreurs si la récupération des données échoue
       }
     );
+>>>>>>> f3d42fdc1c10e0fe7ffef2baa7fae1f019948237
   }
   
   onChange() {
