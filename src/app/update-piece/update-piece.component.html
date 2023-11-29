@@ -9,8 +9,8 @@
             <input  readonly type="text" [(ngModel)]="currentPiece.idPiece" name="idPiece" class="form-control">
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4">
-            <label>Nom de Piéce</label>
-            <input type="text" [(ngModel)]="currentPiece.nom" name="nom" class="form-control">
+            <label>nom de Piéce</label>
+            <input type="text" [(ngModel)]="currentPiece.nomPiece" name="nomPiece" class="form-control">
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4">
             <label>Modele</label>
@@ -18,20 +18,20 @@
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4">
             <label>Prix </label>
-            <input type="number" [(ngModel)]="currentPiece.prix" name="prix" class="form-control">
+            <input type="number" [(ngModel)]="currentPiece.prixPiece" name="prixPiece" class="form-control">
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4">
             <label>Date De Mise</label>
-            <input type="date" [(ngModel)]="currentPiece.dateMise" name="dateMise" class="form-control">
+            <input type="date" [(ngModel)]="currentPiece.dateCreation" name="dateCreation" class="form-control">
         </div>
-        <div class="col-sm-4 col-md-4 col-lg-4">
-            <label>Nature</label>
+         <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>nature</label>
             <select class="form-control form-control-lg" id="idNat" name="idNat"[(ngModel)]="updatedNatId">
             <option *ngFor="let nat of natures" [value]="nat.idNat" >
             {{nat.nomNat}}
             </option>
             </select>
-            </div>
+            </div> 
            
 <div class="mt-2">
 <button type="submit" (click)="updatePiece()" class="btn btn-success">Modifer</button>

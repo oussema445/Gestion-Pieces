@@ -4,13 +4,13 @@
         <div>
             <h2>Ajouter une novelle Piéce  :</h2>
         </div>
-        <div  class="col-sm-2 col-md-2 col-lg-2">
+        <div hidden  class="col-sm-2 col-md-2 col-lg-2">
             <label>Ref</label>
             <input type="text" [(ngModel)]="newPiece.idPiece" name="idPiece" class="form-control">
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4">
-            <label>Nom de Piéce</label>
-            <input type="text" [(ngModel)]="newPiece.nom" name="nom" class="form-control">
+            <label>nom Piéce</label>
+            <input type="text" [(ngModel)]="newPiece.nomPiece" name="nomPiece" class="form-control">
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4">
             <label>Modele</label>
@@ -18,21 +18,21 @@
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4">
             <label>Prix </label>
-            <input type="number" [(ngModel)]="newPiece.prix" name="prix" class="form-control">
+            <input type="number" [(ngModel)]="newPiece.prixPiece" name="prixPiece" class="form-control">
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4">
             <label>Date De Mise</label>
-            <input type="date" [(ngModel)]="newPiece.dateMise" name="dateMise" class="form-control">
+            <input type="date" [(ngModel)]="newPiece.dateCreation" name="dateCreation" class="form-control">
         </div>
-        <div class="col-sm-4 col-md-4 col-lg-4">
-            <label>Nature</label>
+         <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>nature</label>
             <select class="form-control form-control-lg" id="idNat" name="idNat"
             [(ngModel)]="newIdNat">
             <option *ngFor="let nat of natures" [value]="nat.idNat" >
             {{nat.nomNat}}
             </option>
             </select>
-            </div>
+            </div> 
         <div class="mt-2">
             <button type="submit" (click)="addPiece()" class="btn btn-success">Ajouter</button>
         </div>

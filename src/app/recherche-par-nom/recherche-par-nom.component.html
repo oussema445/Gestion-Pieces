@@ -1,14 +1,16 @@
 <img src="../assets/img/815912.png" width="1536" height="220">
 <div class="container">
-  <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
-    <label><h2>Nature :</h2></label>
-    <select class="form-control form-control-lg" id="idNat" name="idNat" [(ngModel)]="id" (change)="onChange()">
-      <option *ngFor="let nat of Natures" [value]="nat.idNat">
-        {{nat.nomNat}}
-      </option>
-    </select>
+    <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2 mt-2 ">
+        <label>Nom Produit en tapant</label>
+        <input #nom [(ngModel)]="searchTerm" name="searchTerm" class="form-control" >
+        </div>
+        </form>
+
+
+
     
-  </div>
+  
 
   <div class="card shadow mb-4">
     <div class="card-body">
@@ -23,8 +25,8 @@
             <th>Nature</th>
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let piece of pieces">
+        <tbody *ngFor="let piece of pieces | searchFilter:searchTerm ">
+          <tr>
             <td>{{piece.idPiece}}</td>
             <td>{{piece.nomPiece}}</td>
             <td>{{piece.model}}</td>
