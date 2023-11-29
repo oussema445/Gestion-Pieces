@@ -1,21 +1,15 @@
 <img src="../assets/img/815912.png" width="1536" height="220">
 <div class="container">
   <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
-<<<<<<< HEAD
-    <label><h1>Nature :</h1></label>
-    <select class="form-control form-control-lg" id="idNat" name="idNat" [(ngModel)]="selectedNatureId" (change)="onChange()">
-      <option *ngFor="let nat of natures" [value]="nat.idNat">{{nat.nomNat}}</option>
-=======
     <label><h2>Nature :</h2></label>
     <select class="form-control form-control-lg" id="idNat" name="idNat" [(ngModel)]="id" (change)="onChange()">
       <option *ngFor="let nat of Natures" [value]="nat.idNat">
         {{nat.nomNat}}
       </option>
->>>>>>> f3d42fdc1c10e0fe7ffef2baa7fae1f019948237
     </select>
     
+  </div>>
   </div>
-
   <div class="card shadow mb-4">
     <div class="card-body">
       <table class="table table-striped">
@@ -44,6 +38,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    
   </div>
 </div>
