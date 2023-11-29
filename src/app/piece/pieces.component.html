@@ -19,7 +19,7 @@
                         <td>{{piece.nature.nomNat}}</td>
                         <td><a *ngIf="authService.isAdmin()"
                             class="btn btn-danger" (click)="supprimerPiece(piece)">Supprimer</a></td>
-                            <td><a *ngIf="authService.isAdmin()" class="btn btnsuccess" [routerLink]="['/updatePiece',piece.idPiece]">Modifier</a></td>
+                            <td><a *ngIf="authService.isAdmin()" class="btn btn-success" [routerLink]="['/updatePiece',piece.idPiece]">Modifier</a></td>
                     </tr>
                   
                 </tbody>

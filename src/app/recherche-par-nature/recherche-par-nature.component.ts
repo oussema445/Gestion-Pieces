@@ -31,11 +31,7 @@ export class RechercheParNatureComponent implements OnInit {
       this.pieceService.rechercherPiecesParNature(this.IdNature).subscribe(
         (pieces: Piece[]) => {
           this.pieces = pieces;
-          console.log('Pièces avec la nature sélectionnée :', this.pieces);
-        },
-        (error: any) => {
-          console.error('Erreur lors de la recherche des pièces par nature :', error);
-        }
+          console.log('Pièces avec la nature sélectionnée :', this.pieces);}
       );
     }
   }

@@ -1,7 +1,7 @@
 <img src="../assets/img/815912.png" width="1536" height="220">
 <div class="container">
   <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
-    <label>Nature</label>
+    <label><h1>Nature :</h1></label>
     <select class="form-control form-control-lg" id="idNat" name="idNat" [(ngModel)]="selectedNatureId" (change)="onChange()">
       <option *ngFor="let nat of natures" [value]="nat.idNat">{{nat.nomNat}}</option>
     </select>
