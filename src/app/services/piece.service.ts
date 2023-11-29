@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Piece } from '../model/piece.model';
-import { Nature } from '../model/nature.model';
-import { Observable, catchError, of } from 'rxjs';
+import { nature } from '../model/nature.model';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-
-  
+const httpOptions = {headers: new HttpHeaders( {'Content-Type': 'application/json'} )
+};
 
 
 @Injectable({
@@ -13,89 +14,71 @@ import { Observable, catchError, of } from 'rxjs';
 export class PieceService {
 
 
- pieces : Piece[]; 
- piece! : Piece;
+  apiURL: string = 'http://localhost:8080/pieces/api';
+  apiURLNat: string = 'http://localhost:8080/pieces/nat';
 
+ // pieces! : Piece[];
+  piece!: Piece;
 
+  constructor(private http : HttpClient) {
+    /*  this.natures = [ {idNat : 1, nomPieceNat : "Derection"},
+ {idNat : 2, nomPieceNat : "Accessoires"},
+ {idNat : 3, nomPieceNat : "batterie"}]; 
+    this.pieces = [{ idPiece: 1, nomPiece: "CRÉMAILLÈRE DE DIRECTION", model: "Volkswagen serie Golf",prixPiece: 1500, dateCreation: new Date("01/14/2011"), nature: { idNat: 1, nomPieceNat: "Derection" } },
+    { idPiece: 2, nomPiece: "RÉTROVISEUR", model: "BMW serie M",prixPiece: 800, dateCreation: new Date("12/17/2010"), nature: { idNat: 2, nomPieceNat: "Accessoires" } },
+    { idPiece: 3, nomPiece: "DISQUE DE FREIN", model: "MerCedes Benz",prixPiece: 220, dateCreation: new Date("02/20/2020"), nature: { idNat: 1, nomPieceNat: "Derection" } }
+    ];*/
 
-
-
-
-
-  
-
-
-
- natures : Nature[];
-  constructor() { 
-    this.natures = [ {idNat : 1, nomNat : "Derection"},
-{idNat : 2, nomNat : "Accessoires"},
-{idNat : 3, nomNat : "batterie"}];
-    this.pieces = [{idPiece : 1, nom : "CRÉMAILLÈRE DE DIRECTION", model :"Volkswagen serie Golf", prix : 1500, dateMise : new Date("01/14/2011"),nature : {idNat : 1, nomNat : "Derection"}},
-                     {idPiece : 2, nom : "RÉTROVISEUR", model :"BMW serie M", prix : 800, dateMise: new Date("12/17/2010"),nature : {idNat : 2, nomNat : "Accessoires"}},
-                     {idPiece : 3, nom :"DISQUE DE FREIN", model :"MerCedes Benz", prix : 220, dateMise : new Date("02/20/2020"),nature : {idNat : 1, nomNat : "Derection"}}
-                    ];
-    
   }
 
-  listePieces():Piece[] {
-    return this.pieces;
+  listePieces(): Observable<Piece[]>{
+    return this.http.get<Piece[]>(this.apiURL);
     }
 
-    ajouterPiece( pie: Piece){
-      this.pieces.push(pie);
+
+    ajouterPiece( piec: Piece):Observable<Piece>{
+      return this.http.post<Piece>(this.apiURL, piec, httpOptions);
       }
-      supprimerPiece( piec: Piece){
-        
-        const index = this.pieces.indexOf(piec, 0);
-        if (index > -1) {
-        this.pieces.splice(index, 1);
+      supprimerPiece(id : number) {
+        const url = `${this.apiURL}/${id}`;
+        return this.http.delete(url, httpOptions);
         }
-      
-        }
-        consulterPiece(id:number): Piece{
-          this.piece = this.pieces.find(p => p.idPiece == id)!;
-          return this.piece;
+        consulterPiece(id: number): Observable<Piece> {
+          const url = `${this.apiURL}/${id}`;
+          return this.http.get<Piece>(url);
           }
 
-          trierPieces(){
-            this.pieces = this.pieces.sort((n1,n2) => {
-            if (n1.idPiece! > n2.idPiece!) {
-            return 1;
-            }
-            if (n1.idPiece! < n2.idPiece!) {
-            return -1;
-            }
-            return 0;
-            });
-            }
+ /*  trierPieces() {
+    this.pieces = this.pieces.sort((n1, n2) => {
+      if (n1.idPiece! > n2.idPiece!) {
+        return 1;
+      }
+      if (n1.idPiece! < n2.idPiece!) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+ */
+  updatePiece(piec:Piece) : Observable<Piece>
+  {
+  return this.http.put<Piece>(this.apiURL, piec, httpOptions);
+  }
+  listenatures():Observable<nature[]>{
+    return this.http.get<nature[]>(this.apiURL+"/nat");
+    }
 
-          updatePiece(p:Piece){
-this.supprimerPiece(p);
-this.ajouterPiece(p);
-this.trierPieces();
-}
-listeNatures(): Observable<Nature[]> {
-  return of(this.natures); // Supposons que this.natures soit votre tableau de Nature
-}
+    rechercherParNature(idNat: number): Observable<Piece[]> {
+      const url = `${this.apiURL}/piecsnat/${idNat}`;
+      return this.http.get<Piece[]>(url);
+    }
+    
+    rechercherParNom(nom: string):Observable< Piece[]> {
+      const url = `${this.apiURL}/piecsByName/${nom}`;
+      return this.http.get<Piece[]>(url);
+      }
 
-      consulterNature(id:number): Nature{
-        return this.natures.find(nat => nat.idNat == id)!;
-        }
-       
-        rechercherPiecesParNature(idNat: number): Observable<Piece[]> {
-          return of(this.filterPiecesByNature(idNat)).pipe(
-            catchError((error: any) => {
-              console.error('Une erreur s\'est produite', error);
-              return of([]); // Retourne un Observable vide en cas d'erreur
-            })
-          );
-        }
-        
-        private filterPiecesByNature(idNat: number): Piece[] {
-          return this.pieces.filter(piece => piece.nature.idNat === idNat);
-        }
-        
+
 }
 
 

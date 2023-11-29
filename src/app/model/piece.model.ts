@@ -1,9 +1,9 @@
-import { Nature } from "./nature.model";
+import { nature } from "./nature.model";
 export class Piece {
-    idPiece? : number;
-    nom? : string;
-    model? :string;
-    prix? : number;
-    dateMise? : Date ;
-    nature! : Nature;
+    idPiece!: number;
+    nomPiece! : string;
+    model! :string;
+   prixPiece! : number;
+    dateCreation! : Date ;
+    nature! : nature;
     }

@@ -7,9 +7,11 @@ import { AddPieceComponent } from './add-piece/add-piece.component';
 import { FormsModule } from '@angular/forms';
 import { UpdatePieceComponent } from './update-piece/update-piece.component';
 import { LoginComponent } from './login/login.component';
-import { RechercheParNatureComponent } from './recherche-par-nature/recherche-par-nature.component';
+import { RechercheParnatureComponent } from './recherche-par-nature/recherche-par-nature.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { SearchFilterPipe } from './search-filter.pipe';
+import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
 
 @NgModule({
   declarations: [
@@ -18,14 +20,19 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     AddPieceComponent,
     UpdatePieceComponent,
     LoginComponent,
-    RechercheParNatureComponent,
+    RechercheParnatureComponent,
     ForbiddenComponent,
+    SearchFilterPipe,
+    RechercheParNomComponent,
     
   ],
+
+  
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
